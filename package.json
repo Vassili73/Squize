@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "bootstrap": "^4.6.2",
+    "sass": "^1.75.0"
+  },
+  "scripts": {
+    "sass": "sass scss/custom.scss:css/custom_bootstrap.css"
+  }
+}
