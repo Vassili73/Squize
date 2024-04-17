@@ -2,3 +2,5 @@
 
 # will be created using `npm run build`
 /css/*.css*
+!login.css
+!register.css

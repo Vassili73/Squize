@@ -7,34 +7,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
-
-    <!-- TODO move into separate file -->
-    <style>
-        .form-signin {
-        max-width: 330px;
-        padding: 1rem;
-        }
-
-        .form-signin .form-floating:focus-within {
-        z-index: 2;
-        }
-
-        .form-signin input[type="email"] {
-          margin-bottom: 10px;
-        }
-
-        .form-signin input[type="password-center"] {
-        margin-bottom: -1px;
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
-        }
-
-        .form-signin input[type="password"] {
-        margin-bottom: 10px;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-        }
-    </style>
+    <link rel="stylesheet" href="css/register.css">
 
     <title>Squize - Register</title>
   </head>
@@ -43,6 +16,7 @@
     <div class="container py-3">
       <header>
         <div class="d-flex flex-column flex-md-row align-items-center p-3 mb-4 border-bottom">
+          <a href="/"><img style="width: 40px;" src="./favicon.ico" alt=""></a>
           <a class="text-decoration-none link-body-emphasis" href="/"><h5 class="my-0 mr-md-auto font-weight-normal">Squize</h5></a>
           <a class="d-inline-flex mt-2 mt-md-0 ms-md-auto btn btn-outline-primary" href="/login">Login</a>
         </div>
@@ -71,8 +45,8 @@
       <footer class="my-5 pt-5 text-muted text-center text-small">
         <p class="mb-1">&copy; 2024 Squize Team</p>
         <ul class="list-inline">
-          <li class="list-inline-item"><a href="#">Impressum</a></li>
-          <li class="list-inline-item"><a href="#">GitHub</a></li>
+          <li class="list-inline-item"><a href="/impressum">Impressum</a></li>
+          <li class="list-inline-item"><a target="_blank" href="https://github.com/DerEchteJoghurt/Squize">GitHub</a></li>
         </ul>
       </footer>
   </body>
