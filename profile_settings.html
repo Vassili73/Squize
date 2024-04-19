@@ -46,7 +46,52 @@
           </ul>
         </div>
 
-        <h1>TODO settings</h1>
+        <div class="form-signin w-100 m-4">
+          <div class="row">
+            <div class="col mb-3">
+              <h2>Change Username</h2>
+              <form id="usernameForm">
+                <div class="form-floating">
+                  <label for="floatingUsername">New Username</label>
+                  <input type="password" class="form-control" id="floatingUsername" placeholder="Password">
+                </div>
+                <br>
+                <button class="btn btn-primary w-100 py-2" type="submit">Save Changes</button>
+              </form>
+            </div>
+        
+            <div class="col mb-3">
+              <h2>Change Password</h2>
+              <form>          
+                <div class="form-floating">
+                  <input type="password" class="form-control" id="floatingInput" placeholder="Password">
+                  <label for="floatingInput">Old Password</label>
+                </div>
+                <div class="form-floating">
+                  <input type="password-center" class="form-control" id="floatingPassword" placeholder="Password">
+                  <label for="floatingPassword">New Password</label>
+                </div>
+                <div class="form-floating">
+                  <input type="password" class="form-control" id="floatingPassword2" placeholder="Password">
+                  <label for="floatingPassword2">Repeat New Password</label>
+                </div>
+                <br>
+                <button class="btn btn-primary w-100 py-2" type="submit">Save Changes</button>
+              </form>
+            </div>
+            <div class="col mb-3">
+              <h2>Change Email</h2>
+              <form id="emailForm">
+                <div class="form-floating">
+                  <input type="email" class="form-control" id="floatingPassword2" placeholder="Password">
+                  <label for="floatingPassword2">New Email</label>
+                </div>
+                <br>
+                <button class="btn btn-primary w-100 py-2" type="submit">Save Changes</button>
+              </form>
+            </div>
+          </div>
+        </div>
       </main>
 
       <footer class="my-5 pt-5 text-muted text-center text-small">
