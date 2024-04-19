@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <title>Squize - Multiplayer</title>
+  </head>
+
+  <body>
+    <div class="container py-3">
+      <header>
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 mb-4 border-bottom">
+          <a href="/"><img style="width: 40px;" src="./favicon.ico" alt=""></a>
+          <a class="text-decoration-none link-body-emphasis" href="/"><h5 class="my-0 mr-md-auto font-weight-normal">Squize</h5></a>
+          <a class="d-inline-flex mt-2 mt-md-0 ms-md-auto btn btn-primary" href="/profile">Profile</a>
+        </div>
+      </header>
+
+      <main>
+        <div class="container py-5">
+            <div class="h-100 d-flex align-items-center justify-content-center">
+                <div>
+                    <div class="bg-body-tertiary rounded">
+                        <h1 class="text-center pt-2">Multiplayer</h1>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <a class="btn btn-primary p-5 m-5">Random</a>
+                            <button type="button" class="btn btn-primary p-5 m-5" data-bs-toggle="modal" data-bs-target="#friendsModal">Friends</a>
+                            <button type="button" class="btn btn-primary p-5 m-5" data-bs-toggle="modal" data-bs-target="#codeModal">Code</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Friends Modal -->
+        <div class="modal fade" id="friendsModal" tabindex="-1" role="dialog" aria-labelledby="friendsModalTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="friendsModalTitle">Friends</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <select class="form-select" multiple aria-label="Select friends">
+                        <option value="1">Friend 1</option>
+                        <option value="2">Friend 2</option>
+                        <option value="3">Friend 3</option>
+                        <option value="4">Friend 4</option>
+                        <option value="5">Friend 5</option>
+                        <option value="6">Friend 6</option>
+                        <option value="7">Friend 7</option>
+                        <option value="8">Friend 8</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="location.href='/quiz_play1';">Start</button>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Modal -->
+        <div class="modal fade" id="codeModal" tabindex="-1" role="dialog" aria-labelledby="codeModalTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="codeModalTitle">Friends</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group py-3">
+                        <span class="input-group-text" id="inputCode">Code</span>
+                        <input type="text" class="form-control" aria-label="Enter code" aria-describedby="inputCode">
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="hostGame">
+                        <label class="form-check-label" for="hostGame">
+                          Generate code
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="location.href='/quiz_play1';">Start</button>
+                </div>
+                </div>
+            </div>
+        </div>
+      </main>
+
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2024 Squize Team</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="/impressum">Impressum</a></li>
+          <li class="list-inline-item"><a target="_blank" href="https://github.com/DerEchteJoghurt/Squize">GitHub</a></li>
+        </ul>
+      </footer>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
