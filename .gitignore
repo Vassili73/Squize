@@ -1,6 +1,4 @@
 /node_modules
 
 # will be created using `npm run build`
-/css/*.css*
-!login.css
-!register.css
+/css/styles.css*
