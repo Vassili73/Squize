@@ -8,7 +8,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
 
-    <title>Squize - Play</title>
+    <title>Squize - Editor</title>
   </head>
 
   <body>
@@ -17,10 +17,7 @@
         <div class="d-flex flex-column flex-md-row align-items-center p-3 mb-4 border-bottom">
           <a href="/"><img style="width: 40px;" src="./favicon.ico" alt=""></a>
           <a class="text-decoration-none link-body-emphasis" href="/"><h5 class="my-0 mr-md-auto font-weight-normal">Squize</h5></a>
-          <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-            <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/login">Login</a>
-          </nav>
-          <a class="btn btn-outline-primary" href="/register">Register</a>
+          <a class="d-inline-flex mt-2 mt-md-0 ms-md-auto btn btn-outline-primary" href="/profile">Profile</a>
         </div>
       </header>
 
@@ -28,12 +25,18 @@
         <div class="container py-5">
             <div class="h-100 d-flex align-items-center justify-content-center">
                 <div>
-                    <div class="bg-body-secondary rounded">
-                        <h2 class="p-5 text-center">Wie heißt der Fluss welcher durch das Neckartal fließt?</h2>
-                        <div class="input-group mb-3 p-5">
-                          <input type="text" class="form-control" placeholder="Answer" aria-label="Answer" aria-describedby="button-addon2">
-                          <button class="btn btn-primary" type="button" id="button-addon2" onclick="location.href='/quiz_play2_end';">Submit</button>
+                    <div class="bg-body-secondary rounded" style="width: 80rem;">
+                        <div class="w-100 col-sm-10">
+                          <input type="text" class="form-control-plaintext text-center display-6" value="Wie heißt der Fluss welcher durch das Neckartal fließt?">
                         </div>
+                        <div class="input-group mb-3 p-5">
+                          <input type="text" class="form-control" placeholder="Answer" aria-label="Answer" value="Neckar">
+                        </div>
+                    </div>
+                    <div class="h-100 d-flex align-items-center justify-content-center py-2">
+                      <a class="btn btn-outline-primary mx-2" href="/quiz_edit1">Previous</a>
+                      <a class="btn btn-success mx-2" href="#">Save</a>
+                      <a class="btn btn-primary mx-2" href="#">Create new</a>
                     </div>
                 </div>
             </div>
