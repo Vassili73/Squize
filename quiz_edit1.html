@@ -75,11 +75,27 @@
                     </div>
                     <div class="h-100 d-flex align-items-center justify-content-center py-2">
                       <a class="btn btn-success mx-2" href="#">Save</a>
-                      <a class="btn btn-primary mx-2" href="/quiz_edit2">Create new</a>
+                      <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#createNewModal">Create new</button>
                       <a class="btn btn-outline-primary mx-2" href="/quiz_edit2">Next</a>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Create New Modal -->
+        <div class="modal fade" id="createNewModal" tabindex="-1" role="dialog" aria-labelledby="createNewModalTitle" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createNewModalTitle">Select Question Type</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <button type="button" class="btn btn-primary" onclick="location.href='/quiz_edit1';">Multiple Choice</button>
+                  <button type="button" class="btn btn-primary" onclick="location.href='/quiz_edit2';">Text Input</button>
+                </div>
+              </div>
+          </div>
         </div>
       </main>
 
@@ -91,5 +107,7 @@
         </ul>
       </footer>
     </div>
+
+    <script type="module" src="js/main.js"></script>
   </body>
 </html>
