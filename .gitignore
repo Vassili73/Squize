@@ -2,3 +2,6 @@
 
 # will be created using `npm run build`
 /public/css/styles.css*
+
+# database
+*.sqlite
