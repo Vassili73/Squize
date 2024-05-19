@@ -1,11 +1,12 @@
 {
   "scripts": {
     "build": "npm run css-compile",
-    "css-compile": "sass --style compressed --source-map --embed-sources --no-error-css --load-path=node_modules scss/:css/",
-    "server": "sirv --dev --no-clear --port 3000"
+    "css-compile": "sass --style compressed --source-map --embed-sources --no-error-css --load-path=node_modules scss/:public/css/",
+    "server": "node app.js"
   },
   "dependencies": {
-    "bootstrap": "^5.3.3"
+    "bootstrap": "^5.3.3",
+    "express": "^4.19.2"
   },
   "devDependencies": {
     "sass": "^1.75.0",

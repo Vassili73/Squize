@@ -1,4 +1,4 @@
 /node_modules
 
 # will be created using `npm run build`
-/css/styles.css*
+/public/css/styles.css*
