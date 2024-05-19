@@ -2,11 +2,13 @@
   "scripts": {
     "build": "npm run css-compile",
     "css-compile": "sass --style compressed --source-map --embed-sources --no-error-css --load-path=node_modules scss/:public/css/",
+    "dev": "nodemon app.js",
     "server": "node app.js"
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "nodemon": "^3.1.0"
   },
   "devDependencies": {
     "sass": "^1.75.0",

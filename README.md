@@ -33,3 +33,8 @@ Start the server
 npm run server
 ```
 
+or start the server in dev mode (with hot reload):
+
+```bash
+npm run dev
+```
