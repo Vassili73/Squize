@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/login.css">
 
+    <script src="js/jquery.min.js"></script>
+
     <title>Squize - Login</title>
   </head>
 
@@ -23,7 +25,7 @@
       </header>
 
       <main class="form-signin w-100 m-auto">
-        <form action="/profile">
+        <form id="loginForm">
           <h1 class="h3 mb-3 fw-normal">Login</h1>
       
           <div class="form-floating">
@@ -53,5 +55,32 @@
         </ul>
       </footer>
     </div>
+
+    <script>
+        $(document).ready(function() {
+          $('#loginForm').submit(function(form) {
+            form.preventDefault();
+
+            // get data from form and clanup with trim
+            var mail = $('#floatingInput').val().trim();
+            var pw = $('#floatingPassword').val().trim();
+
+            $.ajax({
+              url: 'http://localhost:3000/api/user/login',
+              method: 'POST',
+              contentType: 'application/json; charset=utf-8',
+              cache: false,
+              dataType: 'json',
+              data: JSON.stringify({ 'email': mail, 'password': pw })
+            }).done(function (response) {
+              console.log(response);
+
+              location.href = 'profile';
+            }).fail(function (jqXHR, statusText, error) {
+              console.log(jqXHR.responseText);
+            });
+          });
+        });
+    </script>
   </body>
 </html>
