@@ -15,20 +15,29 @@ class UserDao {
         return result;
     }
 
-    loadByUsername(benutzername, passwort) {
+    loadByUsername(benutzername, password) {
         var sql = 'SELECT * FROM User WHERE username=? AND password=?';
         var statement = this._conn.prepare(sql);
-        var params = [benutzername, passwort];
-        var result = statement.get(params);
+        var result = statement.get([benutzername, password]);
      
         return result;
     }
 
-    loadByEmail(email, passwort) {
+    loadByEmail(email, password) {
         var sql = 'SELECT * FROM User WHERE email=? AND password=?';
         var statement = this._conn.prepare(sql);
-        var params = [email, passwort];
-        var result = statement.get(params);
+        var result = statement.get([email, password]);
+
+        return result;
+    }
+
+    create(email, password) {
+        var sql = 'INSERT INTO User (username,password,email) VALUES (?,?,?)';
+        var statement = this._conn.prepare(sql);
+        var result = statement.run([/* TODO implement usernames */'placeholder', password, email]);
+        if (result.changes != 1) {
+            return undefined;
+        }
 
         return result;
     }

@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/register.css">
 
+    <script src="js/jquery.min.js"></script>
+
     <title>Squize - Register</title>
   </head>
 
@@ -49,5 +51,39 @@
           <li class="list-inline-item"><a target="_blank" href="https://github.com/DerEchteJoghurt/Squize">GitHub</a></li>
         </ul>
       </footer>
+
+      <script>
+        $(document).ready(function() {
+          $('#registerForm').submit(function(form) {
+            form.preventDefault();
+
+            // get data from form and clanup with trim
+            var mail = $('#floatingInput').val().trim();
+            var pw = $('#floatingPassword').val().trim();
+            var pw2 = $('#floatingPassword2').val().trim();
+
+            // TODO
+            if (pw !== pw2) {
+              console.log("Passwords don't match");
+              return;
+            }
+
+            $.ajax({
+              url: 'http://localhost:3000/api/user/register',
+              method: 'POST',
+              contentType: 'application/json; charset=utf-8',
+              cache: false,
+              dataType: 'json',
+              data: JSON.stringify({ 'email': mail, 'password': pw })
+            }).done(function (response) {
+              console.log(response);
+
+              location.href = 'profile';
+            }).fail(function (jqXHR, statusText, error) {
+              console.log(jqXHR.responseText);
+            });
+          });
+        });
+    </script>
   </body>
 </html>
