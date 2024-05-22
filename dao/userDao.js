@@ -1,3 +1,6 @@
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 class UserDao {
     constructor(dbConnection) {
         this._conn = dbConnection;
@@ -15,26 +18,37 @@ class UserDao {
         return result;
     }
 
-    loadByUsername(benutzername, password) {
-        var sql = 'SELECT * FROM User WHERE username=? AND password=?';
+    loadByEmail(email) {
+        var sql = 'SELECT * FROM User WHERE email=?';
         var statement = this._conn.prepare(sql);
-        var result = statement.get([benutzername, password]);
-     
+        var result = statement.get([email]);
+
         return result;
     }
 
-    loadByEmail(email, password) {
-        var sql = 'SELECT * FROM User WHERE email=? AND password=?';
-        var statement = this._conn.prepare(sql);
-        var result = statement.get([email, password]);
+    checkPassword(email, password) {
+        let user = this.loadByEmail(email);
+        if (user === undefined) {
+            return undefined;
+        }
 
-        return result;
+        if (bcrypt.compareSync(password, user.password) === false) {
+            return undefined;
+        }
+
+        return user;
     }
 
     create(email, password) {
+        if (this.loadByEmail(email) !== undefined) {
+            return undefined;
+        }
+
+        let hash = bcrypt.hashSync(password, saltRounds);
+
         var sql = 'INSERT INTO User (username,password,email) VALUES (?,?,?)';
         var statement = this._conn.prepare(sql);
-        var result = statement.run([/* TODO implement usernames */'placeholder', password, email]);
+        var result = statement.run([/* TODO implement usernames */'placeholder', hash, email]);
         if (result.changes != 1) {
             return undefined;
         }
