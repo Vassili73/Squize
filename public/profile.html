@@ -8,6 +8,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
 
+    <script src="js/jquery.min.js"></script>
     <title>Squize - Profile</title>
   </head>
 
@@ -143,7 +144,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <form>
+                  <p id="errormsg" style="opacity: 0; color: red;"></p>
+                  <form id="newquizform">
                     <div class="mb-3">
                       <label for="quiz-title" class="col-form-label">Title:</label>
                       <input type="text" class="form-control" id="quiz-title">
@@ -155,15 +157,14 @@
                     <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" role="switch" id="publicSwitch">
                       <label class="form-check-label" for="publicSwitch">Public</label>
-                    </div>                  
-                  </form>        
-                </div>
+                    </div>                         
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" onclick="location.href='/quiz_edit1';">Create</button>
+                    <button type="submit" class="btn btn-success">Create</button>
+                </div>
+                </form>
                 </div>
               </div>
-          </div>
-        </div>
+           </div>
 
         <!-- Edit Modal -->
         <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalTitle" aria-hidden="true">
@@ -174,14 +175,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                  <p id="errormsg" style="opacity: 0; color: red;">asdasds</p>
                   <form>
                     <div class="mb-3">
-                      <label for="quiz-title" class="col-form-label">Title:</label>
-                      <input type="text" class="form-control" id="quiz-title" value="Wissenstest">
+                      <label for="quiz-title-edit" class="col-form-label">Title:</label>
+                      <input type="text" class="form-control" id="quiz-title-edit" value="Wissenstest">
                     </div>
                     <div class="mb-3">
-                      <label for="quiz-description" class="col-form-label">Description:</label>
-                      <textarea class="form-control" id="quiz-description">Teste dein Wissen in verschiedenen Arten bla bla bla und so weiter........</textarea>
+                      <label for="quiz-description-edit" class="col-form-label">Description:</label>
+                      <textarea class="form-control" id="quiz-description-edit">Teste dein Wissen in verschiedenen Arten bla bla bla und so weiter........</textarea>
                     </div>
                     <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" role="switch" id="publicSwitch" checked>
@@ -195,6 +197,7 @@
                     <button type="button" class="btn btn-success" data-bs-dismiss="modal">Save</button>
                 </div>
               </div>
+            
           </div>
         </div>
       </main>
@@ -209,5 +212,22 @@
     </div>
 
     <script type="module" src="js/main.js"></script>
+    <script>
+    $(document).ready(function() {
+      $('#newquizform').submit(function(form) {
+        form.preventDefault();
+
+        var quizheader = {quizname : "", beschreibung : ""};
+        quizheader.quizname = $("#quiz-title").val();
+        quizheader.beschreibung = $("quiz-description").val();
+        if (quizheader.quizname  == "") {
+          $('#errormsg').css("opacity", 100).text("Your Quiz needs a Title").fadeTo(4500, 0);
+          console.log("error creating quiz");
+          return;
+        }
+        localStorage.setItem("Quizheader", JSON.stringify(quizheader))
+        location.href= "/quiz_edit1"
+      })});
+    </script>
   </body>
 </html>

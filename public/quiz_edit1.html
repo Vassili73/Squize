@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/quiz_play.css">
 
+    <script src="js/jquery.min.js"></script>
     <title>Squize - Editor</title>
   </head>
 
@@ -28,16 +29,16 @@
                 <div>
                     <div class="bg-body-secondary rounded">
                         <div class="w-100 col-sm-10">
-                          <input type="text" class="form-control-plaintext text-center display-6" value="Was ist die Hauptstadt von Deutschland?">
+                          <input id="question" type="text" class="form-control-plaintext text-center display-6" value="Was ist die Hauptstadt von Deutschland?">
                         </div>
                         <div class="row row-cols-2 p-5">
                             <div class="col py-2">
                               <div class="d-flex align-items-center quiz_button h-100">
                                 <div class="input-group h-100 m-5">
                                   <div class="input-group-text">
-                                    <input class="form-check-input mt-0" name="correctRadios" type="radio" value="" aria-label="Correct">
+                                    <input class="form-check-input mt-0" name="correctRadios" type="radio" value="ol" aria-label="Correct">
                                   </div>
-                                  <input type="text" class="form-control" value="Tübingen" aria-label="Field value">     
+                                  <input id="ol" type="text" class="form-control" value="Tübingen" aria-label="Field value">     
                                 </div>
                               </div>
                             </div>
@@ -45,9 +46,9 @@
                               <div class="d-flex align-items-center quiz_button h-100">
                                 <div class="input-group h-100 m-5">
                                   <div class="input-group-text">
-                                    <input class="form-check-input mt-0" name="correctRadios" type="radio" value="" aria-label="Correct" checked>
+                                    <input class="form-check-input mt-0" name="correctRadios" type="radio" value="or" aria-label="Correct" checked>
                                   </div>
-                                  <input type="text" class="form-control" value="Berlin" aria-label="Field value">     
+                                  <input id="or" type="text" class="form-control" value="Berlin" aria-label="Field value">     
                                 </div>
                               </div>
                             </div>
@@ -55,9 +56,9 @@
                               <div class="d-flex align-items-center quiz_button h-100">
                                 <div class="input-group h-100 m-5">
                                   <div class="input-group-text">
-                                    <input class="form-check-input mt-0" name="correctRadios" type="radio" value="" aria-label="Correct">
+                                    <input class="form-check-input mt-0" name="correctRadios" type="radio" value="ul" aria-label="Correct">
                                   </div>
-                                  <input type="text" class="form-control" value="Albstadt" aria-label="Field value">     
+                                  <input id="ul" type="text" class="form-control" value="Albstadt" aria-label="Field value">     
                                 </div>
                               </div>
                             </div>
@@ -65,18 +66,18 @@
                               <div class="d-flex align-items-center quiz_button h-100">
                                 <div class="input-group h-100 m-5">
                                   <div class="input-group-text">
-                                    <input class="form-check-input mt-0" name="correctRadios" type="radio" value="" aria-label="Correct">
+                                    <input class="form-check-input mt-0" name="correctRadios" type="radio" value="ur" aria-label="Correct">
                                   </div>
-                                  <input type="text" class="form-control" value="6394" aria-label="Field value">     
+                                  <input id="ur" type="text" class="form-control" value="6394" aria-label="Field value">     
                                 </div>
                               </div>
                             </div>
                         </div>
                     </div>
                     <div class="h-100 d-flex align-items-center justify-content-center py-2">
-                      <a class="btn btn-success mx-2" href="#">Save</a>
-                      <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#createNewModal">Create new</button>
-                      <a class="btn btn-outline-primary mx-2" href="/quiz_edit2">Next</a>
+                      <button id="savebtn" class="btn btn-success mx-2" href="#">Save</button>
+                      <button id="creatbtn" type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#createNewModal">Create new</button>
+                      <button id="nextbtn" class="btn btn-outline-primary mx-2" href="/quiz_edit2">Next</button>
                     </div>
                 </div>
             </div>
@@ -109,5 +110,48 @@
     </div>
 
     <script type="module" src="js/main.js"></script>
+    <script>
+      function addQuestionToLocalStorage(questionobject) {
+        var quiz = JSON.parse(localStorage.getItem("Quizheader"));
+        if (!(quiz.hasOwnProperty("questions"))){
+          var questions = [];
+          questions.push({pos : 1, question : questionobject.question, answers : questionobject.answer});
+          console.log("question is first");
+          console.dir(JSON.stringify(questions));
+          quiz.questions = JSON.stringify(questions)
+        }
+        else {
+          var questions = JSON.parse(quiz.questions);
+          questions.push({pos : (questions[0].pos + 1),question : questionobject.question, answers : questionobject.answer});
+          quiz.questions = JSON.stringify(questions);
+          console.log("not")
+        }
+        localStorage.setItem("Quizheader", JSON.stringify(quiz));
+      }
+      $(document).ready(function() {
+        $("#savebtn").on("click", () => {
+          var correct = $("input[type='radio']:checked").val();
+          var wrong = ["or","ol", "ur", "ul"];
+          w = wrong.indexOf(correct);
+          wrong.splice(w, 1);
+          addQuestionToLocalStorage({questsion : $("#question").val(), answer : {
+            correct : $(correct),
+            wrong1 : $(wrong[0]),
+            wrong2 : $(wrong[1]),
+            wrong3 : $(wrong[2])
+          }})
+        })
+        $("#createbtn").on("click", () => {
+          addQuestionToLocalStorage({questsion : $("#question").val(), answer : {
+            correct : $(correct),
+            wrong1 : $(wrong[0]),
+            wrong2 : $(wrong[1]),
+            wrong3 : $(wrong[2])
+          }})})
+        $("#nextbtn").on("click", () => {
+        })
+    
+      });
+    </script>
   </body>
 </html>

@@ -8,6 +8,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
 
+    <script src="js/jquery.min.js"></script>
     <title>Squize - Editor</title>
   </head>
 
@@ -27,16 +28,16 @@
                 <div>
                     <div class="bg-body-secondary rounded" style="width: 80rem;">
                         <div class="w-100 col-sm-10">
-                          <input type="text" class="form-control-plaintext text-center display-6" value="Wie heißt der Fluss welcher durch das Neckartal fließt?">
+                          <input id="question" type="text" class="form-control-plaintext text-center display-6" value="Wie heißt der Fluss welcher durch das Neckartal fließt?">
                         </div>
                         <div class="input-group mb-3 p-5">
-                          <input type="text" class="form-control" placeholder="Answer" aria-label="Answer" value="Neckar">
+                          <input id="answer" type="text" class="form-control" placeholder="Answer" aria-label="Answer" value="Neckar">
                         </div>
                     </div>
                     <div class="h-100 d-flex align-items-center justify-content-center py-2">
-                      <a class="btn btn-outline-primary mx-2" href="/quiz_edit1">Previous</a>
-                      <a class="btn btn-success mx-2" href="#">Save</a>
-                      <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#createNewModal">Create new</button>
+                      <button id="prevbtn" class="btn btn-outline-primary mx-2" href="/quiz_edit1">Previous</button>
+                      <button id="savebtn" class="btn btn-success mx-2" href="#">Save</button>
+                      <button id="createbtn" type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#createNewModal">Create new</button>
                     </div>
                 </div>
             </div>
@@ -69,5 +70,34 @@
     </div>
 
     <script type="module" src="js/main.js"></script>
+    <script>
+      function addQuestionToLocalStorage(questionobject) {
+        var quiz = JSON.parse(localStorage.getItem("Quizheader"));
+        if (!(quiz.hasOwnProperty("questions"))){
+          var questions = [];
+          questions.push({pos : 1, question : questionobject.question, answers : questionobject.answer});
+          console.log("question is first");
+          console.dir(JSON.stringify(questions));
+          quiz.questions = JSON.stringify(questions)
+        }
+        else {
+          var questions = JSON.parse(quiz.questions);
+          questions.push({pos : (questions[0].pos + 1),question : questionobject.question, answers : questionobject.answer});
+          quiz.questions = JSON.stringify(questions);
+          console.log("not")
+        }
+        localStorage.setItem("Quizheader", JSON.stringify(quiz));
+      }
+      $(document).ready(function() {
+        $("#savebtn").on("click", () => {
+          addQuestionToLocalStorage({questsion : $("#question").val(), answer : {correct : $("#answer").val()}})
+        })
+        $("#createbtn").on("click", () => {
+        })
+        $("#prevbtn").on("click", () => {
+        })
+    
+      });
+    </script>
   </body>
 </html>
