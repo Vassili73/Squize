@@ -33,6 +33,10 @@
             <label for="floatingInput">Email</label>
           </div>
           <div class="form-floating">
+            <input type="text" class="form-control form-signin" id="floatingUsername" placeholder="Max Mustermann">
+            <label for="floatingUsername">Username</label>
+          </div>
+          <div class="form-floating">
             <input type="password" class="form-control form-signin-password-center" id="floatingPassword" placeholder="Password">
             <label for="floatingPassword">Password</label>
           </div>
@@ -42,6 +46,7 @@
           </div>
           <button class="btn btn-primary w-100 py-2" type="submit">Register</button>
         </form>
+        <p id="errormsg" style="opacity: 0; color: red;"></p>
       </main>
 
       <footer class="my-5 pt-5 text-muted text-center text-small">
@@ -59,12 +64,17 @@
 
             // get data from form and clanup with trim
             var mail = $('#floatingInput').val().trim();
+            var username = $('#floatingUsername').val().trim();
             var pw = $('#floatingPassword').val().trim();
             var pw2 = $('#floatingPassword2').val().trim();
 
             // TODO
             if (pw !== pw2) {
               console.log("Passwords don't match");
+              return;
+            }
+            if (pw.length == 0 || pw2.length == 0 || username.length == 0 || mail.length == 0) {
+              $('#errormsg').css("opacity", 100).text("You have to fill out all fields").fadeTo(4500, 0)
               return;
             }
 
@@ -74,12 +84,13 @@
               contentType: 'application/json; charset=utf-8',
               cache: false,
               dataType: 'json',
-              data: JSON.stringify({ 'email': mail, 'password': pw })
+              data: JSON.stringify({'username': username, 'email': mail, 'password': pw })
             }).done(function (response) {
               console.log(response);
 
               location.href = 'profile';
             }).fail(function (jqXHR, statusText, error) {
+              $('#errormsg').css("opacity", 100).text((JSON.parse(jqXHR.responseText).errormsg)).fadeTo(4500, 0)
               console.log(jqXHR.responseText);
             });
           });
