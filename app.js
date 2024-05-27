@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const path = require('path');
 const Database = require('better-sqlite3');
 
@@ -9,6 +10,13 @@ const dbConnection = new Database(path.join(__dirname, 'db/squize.sqlite'), { ve
 app.locals.dbConnection = dbConnection;
 
 app.use(express.json())
+
+// Set up session
+app.use(session({
+    secret: 'securesecretforsquize',
+    resave: false,
+    saveUninitialized: true
+}));
 
 // Static content
 app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));

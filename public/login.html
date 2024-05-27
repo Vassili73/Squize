@@ -78,7 +78,7 @@
 
               location.href = 'profile';
             }).fail(function (jqXHR, statusText, error) {
-              $('#errormsg').css("opacity", 100).text((JSON.parse(jqXHR.responseText).errormsg)).fadeTo(4500, 0)
+              $('#errormsg').css("opacity", 100).text((JSON.parse(jqXHR.responseText).message)).fadeTo(4500, 0)
               console.log(jqXHR.responseText);
             });
           });

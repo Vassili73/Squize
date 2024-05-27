@@ -55,10 +55,10 @@ class UserDao {
             return undefined;
         }
         if (password.length < 8) {
-            return {errormsg : 'password must be at least 8 characters long'};
+            return {message : 'password must be at least 8 characters long'};
         }
         if (password.length > 64) {
-            return {errormsg : 'password cannot be over 64 characters long'};
+            return {message : 'password cannot be over 64 characters long'};
         }
 
         let hash = bcrypt.hashSync(password, saltRounds);

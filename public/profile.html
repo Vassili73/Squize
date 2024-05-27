@@ -213,7 +213,23 @@
 
     <script type="module" src="js/main.js"></script>
     <script>
+    var user = {};
+
     $(document).ready(function() {
+      // Fetch the current user
+      $.ajax({
+        url: 'http://localhost:3000/api/user',
+        method: 'GET',
+        contentType: 'application/json; charset=utf-8',
+        cache: false,
+      }).done(function (response) {
+        console.log(response);
+        user = response;
+      }).fail(function (jqXHR, statusText, error) {
+        console.log(jqXHR.responseText);
+        location.href = 'login';
+      });
+
       $('#newquizform').submit(function(form) {
         form.preventDefault();
 
