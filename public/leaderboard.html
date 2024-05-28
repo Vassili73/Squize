@@ -58,128 +58,7 @@
                             <th scope="col">Prozent</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td>#1</td>
-                            <td><span class="flag-icon flag-icon-de"></span> Peter Zwegat</td>
-                            <td>22001</td>
-                            <td>100%</td>
-                        </tr>
-                        <tr>
-                          <td>#2</td>
-                          <td><span class="flag-icon flag-icon-kr"></span> Beispiel</td>
-                          <td>22001</td>
-                          <td>100%</td>
-                        </tr>
-                        <tr>
-                          <td>#3</td>
-                          <td><span class="flag-icon flag-icon-br"></span> Beispiel</td>
-                          <td>22001</td>
-                          <td>100%</td>
-                        </tr>
-                        <tr>
-                          <td>#4</td>
-                          <td><span class="flag-icon flag-icon-be"></span> Beispiel</td>
-                          <td>22001</td>
-                          <td>100%</td>
-                        </tr>
-                        <tr>
-                          <td>#5</td>
-                          <td><span class="flag-icon flag-icon-hu"></span> Beispiel</td>
-                          <td>22001</td>
-                          <td>100%</td>
-                        </tr>
-                        <tr>
-                          <td>#6</td>
-                          <td><span class="flag-icon flag-icon-mc"></span> Beispiel</td>
-                          <td>22001</td>
-                          <td>100%</td>
-                        </tr>
-                        <tr>
-                          <td>#7</td>
-                          <td><span class="flag-icon flag-icon-fr"></span> Beispiel</td>
-                          <td>22001</td>
-                          <td>100%</td>
-                        </tr>
-                        <tr>
-                          <td>#8</td>
-                          <td><span class="flag-icon flag-icon-ca"></span> Beispiel</td>
-                          <td>22001</td>
-                          <td>100%</td>
-                        </tr>
-                        <tr>
-                          <td>#9</td>
-                          <td><span class="flag-icon flag-icon-kr"></span> Beispiel</td>
-                          <td>22001</td>
-                          <td>100%</td>
-                        </tr>
-                        <tr>
-                          <td>#10</td>
-                          <td><span class="flag-icon flag-icon-be"></span> Beispiel</td>
-                          <td>22001</td>
-                          <td>100%</td>
-                        </tr>
-                        <tr>
-                          <td>#11</td>
-                          <td><span class="flag-icon flag-icon-fr"></span> Beispiel</td>
-                          <td>22001</td>
-                          <td>100%</td>
-                        </tr>
-                        <tr>
-                          <td>#12</td>
-                          <td><span class="flag-icon flag-icon-de"></span> Beispiel</td>
-                          <td>22001</td>
-                          <td>100%</td>
-                        </tr>
-                        <tr>
-                          <td>#13</td>
-                          <td><span class="flag-icon flag-icon-br"></span> Beispiel</td>
-                          <td>22001</td>
-                          <td>100%</td>
-                        </tr>
-                        <tr>
-                          <td>#14</td>
-                          <td><span class="flag-icon flag-icon-hu"></span> Beispiel</td>
-                          <td>22001</td>
-                          <td>100%</td>
-                        </tr>
-                        <tr>
-                          <td>#15</td>
-                          <td><span class="flag-icon flag-icon-gr"></span> Beispiel</td>
-                          <td>22001</td>
-                          <td>100%</td>
-                        </tr>
-                        <tr>
-                          <td>#16</td>
-                          <td><span class="flag-icon flag-icon-cy"></span> Beispiel</td>
-                          <td>22001</td>
-                          <td>100%</td>
-                        </tr>
-                        <tr>
-                          <td>#17</td>
-                          <td><span class="flag-icon flag-icon-tr"></span> Beispiel</td>
-                          <td>22001</td>
-                          <td>100%</td>
-                        </tr>
-                        <tr>
-                          <td>#18</td>
-                          <td><span class="flag-icon flag-icon-at"></span> Beispiel</td>
-                          <td>22001</td>
-                          <td>100%</td>
-                        </tr>
-                        <tr>
-                          <td>#19</td>
-                          <td><span class="flag-icon flag-icon-gb"></span> Beispiel</td>
-                          <td>22001</td>
-                          <td>100%</td>
-                        </tr>
-                        <tr>
-                          <td>#20</td>
-                          <td><span class="flag-icon flag-icon-it"></span> Beispiel</td>
-                          <td>22001</td>
-                          <td>100%</td>
-                        </tr>
-                        </tbody>
+                        <tbody id="leaderboardTableBody"></tbody>
                     </table>
                 </div>
             </div>
@@ -196,6 +75,37 @@
 </div>
 
 <script type="module" src="js/main.js"></script>
+<script src="js/jquery.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $.ajax({
+      url: 'http://localhost:3000/api/leaderboard',
+      method: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      cache: false,
+      dataType: 'json'
+    }).done(function (response) {
+      let content = '';
+      let rank = 1;
+
+      for (let entry of response) {
+        content += '<tr>';
+        content += '<td>#' + rank + '</td>';
+        content += '<td><span class="flag-icon flag-icon-' + entry.user.country.toLowerCase() + '"></span> ' + entry.user.username + '</td>';
+        content += '<td>' + entry.score + '</td>';
+        content += '<td>' + entry.percentage + '%</td>';
+        content += '</tr>';
+
+        rank++;
+      }
+
+      $('#leaderboardTableBody').html(content);
+    }).fail(function (jqXHR, statusText, error) {
+      alert(jqXHR.responseText);
+    });
+  });
+</script>
+
 </body>
 </html>
 

@@ -8,7 +8,8 @@ CREATE TABLE User (
 	user_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	username TEXT NOT NULL,
 	password TEXT NOT NULL,
-	email TEXT NOT NULL
+	email TEXT NOT NULL,
+	country TEXT NOT NULL
 );
 
 -- Quizze
@@ -16,7 +17,7 @@ CREATE TABLE Quizze (
 	quiz_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	user_id INTEGER NOT NULL,
 	quizname TEXT NOT NULL,
-	beschreibung TEXT NOT NULL
+	beschreibung TEXT NOT NULL,
 	ispublic BOOLEAN
 );
 
@@ -39,4 +40,12 @@ CREATE TABLE Questions_text (
 	prev_id INTEGER KEY,
 	question TEXT NOT NULL,
 	answer1 TEXT NOT NULL
+);
+
+CREATE TABLE Leaderboard (
+	leaderboard_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	user_id INTEGER NOT NULL,
+	score INTEGER,
+	percentage INTEGER,
+	FOREIGN KEY (user_id) REFERENCES User(user_id)
 );

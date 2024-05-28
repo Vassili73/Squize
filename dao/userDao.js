@@ -11,9 +11,12 @@ class UserDao {
     }
 
     loadById(id) {
-        var sql = 'SELECT * FROM User WHERE id=?';
+        var sql = 'SELECT * FROM User WHERE user_id=?';
         var statement = this._conn.prepare(sql);
         var result = statement.get(id);
+
+        // Never load password when loading by id
+        delete result.password;
 
         return result;
     }
@@ -63,9 +66,9 @@ class UserDao {
 
         let hash = bcrypt.hashSync(password, saltRounds);
 
-        var sql = 'INSERT INTO User (username,password,email) VALUES (?,?,?)';
+        var sql = 'INSERT INTO User (username,password,email,country) VALUES (?,?,?,?)';
         var statement = this._conn.prepare(sql);
-        var result = statement.run([username, hash, email]);
+        var result = statement.run([username, hash, email, 'DE']);
         if (result.changes != 1) {
             return undefined;
         }

@@ -58,32 +58,7 @@
                             <th scope="col">Prozent</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td>#1</td>
-                            <td><span class="flag-icon flag-icon-de"></span> Peter Zwegat</td>
-                            <td>22001</td>
-                            <td>100%</td>
-                        </tr>
-                        <tr>
-                            <td>#11</td>
-                            <td><span class="flag-icon flag-icon-de"></span> Beispiel</td>
-                            <td>22001</td>
-                            <td>100%</td>
-                        </tr>
-                        <tr>
-                            <td>#14</td>
-                            <td><span class="flag-icon flag-icon-de"></span> Beispiel</td>
-                            <td>22001</td>
-                            <td>100%</td>
-                        </tr>
-                        <tr>
-                            <td>#25</td>
-                            <td><span class="flag-icon flag-icon-de"></span> Beispiel</td>
-                            <td>22001</td>
-                            <td>100%</td>
-                        </tr>
-                        </tbody>
+                        <tbody id="leaderboardTableBody"></tbody>
                     </table>
                 </div>
             </div>
@@ -100,6 +75,36 @@
 </div>
 
 <script type="module" src="js/main.js"></script>
+<script src="js/jquery.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $.ajax({
+      url: 'http://localhost:3000/api/leaderboard/DE',
+      method: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      cache: false,
+      dataType: 'json'
+    }).done(function (response) {
+      let content = '';
+      let rank = 1;
+
+      for (let entry of response) {
+        content += '<tr>';
+        content += '<td>#' + rank + '</td>';
+        content += '<td><span class="flag-icon flag-icon-' + entry.user.country.toLowerCase() + '"></span> ' + entry.user.username + '</td>';
+        content += '<td>' + entry.score + '</td>';
+        content += '<td>' + entry.percentage + '%</td>';
+        content += '</tr>';
+
+        rank++;
+      }
+
+      $('#leaderboardTableBody').html(content);
+    }).fail(function (jqXHR, statusText, error) {
+      alert(jqXHR.responseText);
+    });
+  });
+</script>
 </body>
 </html>
 
