@@ -15,7 +15,10 @@ app.use(express.json())
 app.use(session({
     secret: 'securesecretforsquize',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+        sameSite: 'strict'
+    }
 }));
 
 // Static content

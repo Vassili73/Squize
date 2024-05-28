@@ -18,7 +18,7 @@
         <div class="d-flex flex-column flex-md-row align-items-center p-3 mb-4 border-bottom">
           <a href="/"><img style="width: 40px;" src="./favicon.ico" alt=""></a>
           <a class="text-decoration-none link-body-emphasis" href="/"><h5 class="my-0 mr-md-auto font-weight-normal">Squize</h5></a>
-          <a class="d-inline-flex mt-2 mt-md-0 ms-md-auto btn btn-outline-danger" href="/">Logout</a>
+          <button id="btnLogout" class="d-inline-flex mt-2 mt-md-0 ms-md-auto btn btn-outline-danger">Logout</button>
         </div>
       </header>
 
@@ -228,6 +228,19 @@
       }).fail(function (jqXHR, statusText, error) {
         console.log(jqXHR.responseText);
         location.href = 'login';
+      });
+
+      $('#btnLogout').click(function() {
+        $.ajax({
+          url: 'http://localhost:3000/api/user/logout',
+          method: 'POST',
+          cache: false,
+        }).done(function (response) {
+          console.log(response);
+          location.href = 'login';
+        }).fail(function (jqXHR, statusText, error) {
+          console.log(jqXHR.responseText);
+        });
       });
 
       $('#newquizform').submit(function(form) {

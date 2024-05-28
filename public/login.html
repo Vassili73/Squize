@@ -62,9 +62,12 @@
           $('#loginForm').submit(function(form) {
             form.preventDefault();
 
-            // get data from form and clanup with trim
-            var mail = $('#floatingInput').val().trim();
-            var pw = $('#floatingPassword').val().trim();
+            let mail = $('#floatingInput').val().trim();
+            let pw = $('#floatingPassword').val().trim();
+            let rememberMe = $('#flexCheckDefault').prop('checked');
+
+            // 1 hour session
+            const maxSessionAge = 60 * 60 * 1000;
 
             $.ajax({
               url: 'http://localhost:3000/api/user/login',
@@ -72,7 +75,7 @@
               contentType: 'application/json; charset=utf-8',
               cache: false,
               dataType: 'json',
-              data: JSON.stringify({ 'email': mail, 'password': pw })
+              data: JSON.stringify({ 'email': mail, 'password': pw, 'maxAge': rememberMe ? 0 : maxSessionAge })
             }).done(function (response) {
               console.log(response);
 
