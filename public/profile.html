@@ -155,8 +155,8 @@
                       <textarea class="form-control" id="quiz-description"></textarea>
                     </div>
                     <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" role="switch" id="publicSwitch">
-                      <label class="form-check-label" for="publicSwitch">Public</label>
+                      <input class="form-check-input" type="checkbox" role="switch" id="publicSwitchCreate">
+                      <label class="form-check-label" for="publicSwitchCreate">Public</label>
                     </div>                         
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success">Create</button>
@@ -186,8 +186,8 @@
                       <textarea class="form-control" id="quiz-description-edit">Teste dein Wissen in verschiedenen Arten bla bla bla und so weiter........</textarea>
                     </div>
                     <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" role="switch" id="publicSwitch" checked>
-                      <label class="form-check-label" for="publicSwitch">Public</label>
+                      <input class="form-check-input" type="checkbox" role="switch" id="publicSwitchEdit" checked>
+                      <label class="form-check-label" for="publicSwitchEdit">Public</label>
                     </div>                  
                   </form>        
                 </div>
@@ -247,14 +247,30 @@
         form.preventDefault();
 
         var quizheader = {quizname : "", beschreibung : ""};
+        quizheader.lastedit = Date.now().toString();
         quizheader.quizname = $("#quiz-title").val();
-        quizheader.beschreibung = $("quiz-description").val();
+        quizheader.beschreibung = $("#quiz-description").val();
+        quizheader.is_public = $("#publicSwitchCreate").is(":checked") ? 1 : 0
+        quizheader.is_public = $("#publicSwitchCEdit").is(":checked") ? 1 : 0
         if (quizheader.quizname  == "") {
           $('#errormsg').css("opacity", 100).text("Your Quiz needs a Title").fadeTo(4500, 0);
           console.log("error creating quiz");
           return;
         }
         localStorage.setItem("Quizheader", JSON.stringify(quizheader))
+
+        $.ajax({
+            url: 'http://localhost:3000/api/profile/create_quiz',
+            method: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            cache: false,
+            dataType: 'json',
+            data: JSON.stringify(localStorage.getItem("Quizheader"))
+        }).done(function (response) {
+            console.dir(response);
+        }).fail(function (jqXHR, statusText, error) {
+            console.dir(jqXHR.responseText);
+        });
         location.href= "/quiz_edit1"
       })});
     </script>

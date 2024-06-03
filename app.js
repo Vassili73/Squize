@@ -36,6 +36,9 @@ app.use('/api', require(path.join(__dirname, 'services/leaderboard.js')));
 // User
 app.use('/api', require(path.join(__dirname, 'services/user.js')));
 
+// Quiz
+app.use('/api', require(path.join(__dirname, 'services/quiz.js')));
+
 app.listen(port, () => {
     console.log(`Squize listening at http://localhost:${port}/`);
 });

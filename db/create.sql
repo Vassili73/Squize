@@ -17,8 +17,9 @@ CREATE TABLE Quizze (
 	quiz_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	user_id INTEGER NOT NULL,
 	quizname TEXT NOT NULL,
+	last_edited DATE NOT NULL,
 	beschreibung TEXT NOT NULL,
-	ispublic BOOLEAN
+	is_public BOOLEAN
 );
 
 -- Quizfragen mit auswahlmöglichkeiten

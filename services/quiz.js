@@ -1,7 +1,17 @@
 const express = require('express');
-const UserDao = require('../dao/quizDao.js')
+const QuizDao = require('../dao/quizDao.js')
 var serviceRouter = express.Router();
 
-serviceRouter.post('/user/login', function(request, response) {
-    
+serviceRouter.post('/profile/create_quiz', function(request, response) {
+    let quizDao = new QuizDao(request.app.locals.dbConnection);
+    let res = quizDao.createQuiz(request.body);
+    response.status(400).json(res)
 });
+
+serviceRouter.post('/profile/update_quiz', function(request, response) {
+    let quizDao = new QuizDao(request.app.locals.dbConnection);
+    let res = quizDao.updateQuiz(request.body);
+    response.status(400).json(res)
+});
+
+module.exports = serviceRouter;
