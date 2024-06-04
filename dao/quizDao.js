@@ -81,4 +81,4 @@ class QuizDao {
 
 }
 
-module.exports = quizDao;
+module.exports = QuizDao;
