@@ -11,19 +11,18 @@
     <!-- Flag Icon CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
 
+    <script src="js/utils.js"></script>
+    <script src="js/jquery.min.js"></script>
+
     <title>Leaderboard</title>
 </head>
 
 <body>
 <div class="container py-3">
     <header>
-        <div class="d-flex flex-column flex-md-row align-items-center p-3 mb-4 border-bottom">
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 mb-4 border-bottom" id="navContainer">
             <a href="/"><img style="width: 40px;" src="./favicon.ico" alt=""></a>
             <a class="text-decoration-none link-body-emphasis" href="/"><h5 class="my-0 mr-md-auto font-weight-normal">Squize</h5></a>
-            <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-                <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/login">Login</a>
-            </nav>
-            <a class="btn btn-outline-primary" href="/register">Register</a>
         </div>
     </header>
 
@@ -75,36 +74,59 @@
 </div>
 
 <script type="module" src="js/main.js"></script>
-<script src="js/jquery.min.js"></script>
 <script>
-  $(document).ready(function() {
-    $.ajax({
-      url: 'http://localhost:3000/api/leaderboard',
-      method: 'GET',
-      contentType: 'application/json; charset=utf-8',
-      cache: false,
-      dataType: 'json'
-    }).done(function (response) {
-      let content = '';
-      let rank = 1;
-
-      for (let entry of response) {
-        content += '<tr>';
-        content += '<td>#' + rank + '</td>';
-        content += '<td><span class="flag-icon flag-icon-' + entry.user.country.toLowerCase() + '"></span> ' + entry.user.username + '</td>';
-        content += '<td>' + entry.score + '</td>';
-        content += '<td>' + entry.percentage + '%</td>';
-        content += '</tr>';
-
-        rank++;
-      }
-
-      $('#leaderboardTableBody').html(content);
-    }).fail(function (jqXHR, statusText, error) {
-      alert(jqXHR.responseText);
+    $(document).ready(function() {
+      var user_id = -1;
+      checkCurrentUser(function(user) {
+          if (user) {
+              console.log(user);
+              let nav = $('#navContainer').html();
+              nav += '<nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">'
+              nav += '<a class="btn btn-outline-primary" href="/profile">' + user.username + '\'s Profile</a>'
+              nav += '</nav>'
+              $('#navContainer').html(nav);
+              user_id = user.id;
+          } else {
+              let nav = $('#navContainer').html();
+              nav += '<nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">'
+              nav += '<a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/login">Login</a>'
+              nav += '</nav>'
+              nav += '<a class="btn btn-outline-primary" href="/register"">Register</a>'
+              $('#navContainer').html(nav);
+          }
+  
+          $.ajax({
+              url: 'http://localhost:3000/api/leaderboard',
+              method: 'GET',
+              contentType: 'application/json; charset=utf-8',
+              cache: false,
+              dataType: 'json'
+          }).done(function (response) {
+              let content = '';
+              let rank = 1;
+  
+              for (let entry of response) {
+                  if (entry.user.user_id === user_id) {
+                      content += '<tr class="table-primary">';
+                  } else {
+                      content += '<tr">';
+                  }
+                  content += '<td>#' + rank + '</td>';
+                  content += '<td><span class="flag-icon flag-icon-' + entry.user.country.toLowerCase() + '"></span> ' + entry.user.username + '</td>';
+                  content += '<td>' + entry.score + '</td>';
+                  content += '<td>' + entry.percentage + '%</td>';
+                  content += '</tr>';
+  
+                  rank++;
+              }
+  
+              $('#leaderboardTableBody').html(content);
+          }).fail(function (jqXHR, statusText, error) {
+              alert(jqXHR.responseText);
+          });
+      });
     });
-  });
-</script>
+  </script>
 
 </body>
 </html>

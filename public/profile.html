@@ -8,6 +8,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
 
+    <script src="js/utils.js"></script>
     <script src="js/jquery.min.js"></script>
     <title>Squize - Profile</title>
   </head>
@@ -25,7 +26,7 @@
       <main class="d-flex flex-nowrap">
         <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark rounded" style="width: 14rem;">
           <a href="/profile" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-            <span class="fs-4">Profile</span>
+            <span class="fs-4" id="titleProfile">Profile</span>
           </a>
           <hr>
           <ul class="nav nav-pills flex-column mb-auto">
@@ -213,21 +214,14 @@
 
     <script type="module" src="js/main.js"></script>
     <script>
-    var user = {};
-
     $(document).ready(function() {
-      // Fetch the current user
-      $.ajax({
-        url: 'http://localhost:3000/api/user',
-        method: 'GET',
-        contentType: 'application/json; charset=utf-8',
-        cache: false,
-      }).done(function (response) {
-        console.log(response);
-        user = response;
-      }).fail(function (jqXHR, statusText, error) {
-        console.log(jqXHR.responseText);
-        location.href = 'login';
+      checkCurrentUser(function(user) {
+        if (user) {
+          console.log(user);
+          $('#titleProfile').text(user.username + "'s Profile");
+        } else {
+          location.href = 'login';
+        }
       });
 
       $('#btnLogout').click(function() {
