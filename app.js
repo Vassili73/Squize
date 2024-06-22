@@ -2,6 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const path = require('path');
 const Database = require('better-sqlite3');
+var cors = require('cors')
 
 const app = express();
 const port = 3000;
@@ -10,6 +11,8 @@ const dbConnection = new Database(path.join(__dirname, 'db/squize.sqlite'), { ve
 app.locals.dbConnection = dbConnection;
 
 app.use(express.json())
+
+app.use(cors())
 
 // Set up session
 app.use(session({
