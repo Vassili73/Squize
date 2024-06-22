@@ -36,7 +36,7 @@ serviceRouter.post('/leaderboard/update', function(request, response) {
         return;
     }
 
-    response.status(200);
+    response.status(200).json({});
 });
 
 module.exports = serviceRouter;

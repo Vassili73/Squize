@@ -61,11 +61,12 @@
                 <br>
                 <button class="btn btn-primary w-100 py-2" type="submit">Save Changes</button>
               </form>
+              <p id="errormsgusr" style="opacity: 0; color: red;"></p>
             </div>
         
             <div class="col mb-3">
               <h2>Change Password</h2>
-              <form>          
+              <form id="updatePasswordForm">          
                 <div class="form-floating">
                   <input type="password" class="form-control" id="floatingInput" placeholder="Password">
                   <label for="floatingInput">Old Password</label>
@@ -81,17 +82,19 @@
                 <br>
                 <button class="btn btn-primary w-100 py-2" type="submit">Save Changes</button>
               </form>
+              <p id="errormsgpw" style="opacity: 0; color: red;"></p>
             </div>
             <div class="col mb-3">
               <h2>Change Email</h2>
               <form id="emailForm">
                 <div class="form-floating">
-                  <input type="email" class="form-control" id="floatingPassword2" placeholder="Password">
-                  <label for="floatingPassword2">New Email</label>
+                  <input type="email" class="form-control" id="floatingEmail" placeholder="Password">
+                  <label for="floatingEmail">New Email</label>
                 </div>
                 <br>
                 <button class="btn btn-primary w-100 py-2" type="submit">Save Changes</button>
               </form>
+              <p id="errormsgem" style="opacity: 0; color: red;"></p>
             </div>
           </div>
         </div>
@@ -126,6 +129,81 @@
           console.log(response);
           location.href = 'login';
         }).fail(function (jqXHR, statusText, error) {
+          console.log(jqXHR.responseText);
+        });
+      });
+
+      $('#usernameForm').submit(function(form) {
+        form.preventDefault();
+
+        // get data from form and clanup with trim
+        var username = $('#floatingUsername').val().trim();
+
+        $.ajax({
+          url: '/api/user/update/username',
+          method: 'POST',
+          contentType: 'application/json; charset=utf-8',
+          cache: false,
+          dataType: 'json',
+          data: JSON.stringify({'username': username })
+        }).done(function (response) {
+          console.log(response);
+        }).fail(function (jqXHR, statusText, error) {
+          $('#errormsgusr').css("opacity", 100).text((JSON.parse(jqXHR.responseText).message)).fadeTo(4500, 0)
+          console.log(jqXHR.responseText);
+        });
+      });
+
+      $('#updatePasswordForm').submit(function(form) {
+        form.preventDefault();
+
+        // get data from form and clanup with trim
+        var oldPw = $('#floatingInput').val().trim();
+        var pw = $('#floatingPassword').val().trim();
+        var pw2 = $('#floatingPassword2').val().trim();
+
+        // TODO
+        if (pw !== pw2) {
+          console.log("Passwords don't match");
+          return;
+        }
+        if (pw.length == 0 || pw2.length == 0 || oldPw.length == 0) {
+          $('#errormsgpw').css("opacity", 100).text("You have to fill out all fields").fadeTo(4500, 0)
+          return;
+        }
+
+        $.ajax({
+          url: '/api/user/update/password',
+          method: 'POST',
+          contentType: 'application/json; charset=utf-8',
+          cache: false,
+          dataType: 'json',
+          data: JSON.stringify({'oldpassword': oldPw, 'newpassword': pw })
+        }).done(function (response) {
+          console.log(response);
+        }).fail(function (jqXHR, statusText, error) {
+          $('#errormsgpw').css("opacity", 100).text((JSON.parse(jqXHR.responseText).message)).fadeTo(4500, 0)
+          console.log(jqXHR.responseText);
+        });
+      });
+
+      $('#emailForm').submit(function(form) {
+        form.preventDefault();
+
+        // get data from form and clanup with trim
+        var email = $('#floatingEmail').val().trim();
+
+        $.ajax({
+          url: '/api/user/update/email',
+          method: 'POST',
+          contentType: 'application/json; charset=utf-8',
+          cache: false,
+          dataType: 'json',
+          data: JSON.stringify({'email': email })
+        }).done(function (response) {
+          console.log(response);
+        }).fail(function (jqXHR, statusText, error) {
+          $('#errormsgem').css("opacity", 100).text((JSON.parse(jqXHR.responseText).message)).fadeTo(4500, 0)
           console.log(jqXHR.responseText);
         });
       });

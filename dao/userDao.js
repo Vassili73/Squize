@@ -75,6 +75,42 @@ class UserDao {
 
         return result;
     }
+
+    updateUsername(user_id, username) {
+        var sql = 'UPDATE User SET username=? WHERE user_id=?';
+        var statement = this._conn.prepare(sql);
+        var result = statement.run([username, user_id]);
+        if (result.changes != 1) {
+            return undefined;
+        }
+
+        return result;
+    }
+
+    updateEmail(user_id, email) {
+        var sql = 'UPDATE User SET email=? WHERE user_id=?';
+        var statement = this._conn.prepare(sql);
+        var result = statement.run([email, user_id]);
+        if (result.changes != 1) {
+            return undefined;
+        }
+
+        return result;   
+    }
+
+    updatePassword(user_id, password) {
+        var sql = 'UPDATE User SET password=? WHERE user_id=?';
+        var statement = this._conn.prepare(sql);
+
+        let hash = bcrypt.hashSync(password, saltRounds);
+
+        var result = statement.run([hash, user_id]);
+        if (result.changes != 1) {
+            return undefined;
+        }
+
+        return result;
+    }
 }
 
 module.exports = UserDao;

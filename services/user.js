@@ -61,4 +61,60 @@ serviceRouter.post('/user/register', function(request, response) {
     }
 });
 
+serviceRouter.post('/user/update/username', function(request, response) {
+    if (!request.session || !request.session.loggedIn) {
+        response.status(400).json({ message: 'Not logged in' });
+        return;
+    }
+
+    let userDao = new UserDao(request.app.locals.dbConnection);
+    let result = userDao.updateUsername(request.session.user.user_id, request.body.username);
+    if (result === undefined) {
+        response.status(400).json({ status: 'Failed to update user' });
+        return;
+    }
+
+    request.session.user.username = request.body.username;
+    response.status(200).json({});
+});
+
+serviceRouter.post('/user/update/password', function(request, response) {
+    if (!request.session || !request.session.loggedIn) {
+        response.status(400).json({ message: 'Not logged in' });
+        return;
+    }
+
+    let userDao = new UserDao(request.app.locals.dbConnection);
+    let user = userDao.checkPassword(request.session.user.email, request.body.oldpassword);
+    if (user === undefined) {
+        response.status(400).json({ message: 'Invalid old password' });
+        return;
+    }
+
+    let result = userDao.updatePassword(request.session.user.user_id, request.body.newpassword);
+    if (result === undefined) {
+        response.status(400).json({ status: 'Failed to update user' });
+        return;
+    }
+
+    response.status(200).json({});
+});
+
+serviceRouter.post('/user/update/email', function(request, response) {
+    if (!request.session || !request.session.loggedIn) {
+        response.status(400).json({ message: 'Not logged in' });
+        return;
+    }
+
+    let userDao = new UserDao(request.app.locals.dbConnection);
+    let result = userDao.updateEmail(request.session.user.user_id, request.body.email);
+    if (result === undefined) {
+        response.status(400).json({ status: 'Failed to update user' });
+        return;
+    }
+
+    request.session.user.email = request.body.email;
+    response.status(200).json({});
+});
+
 module.exports = serviceRouter;
