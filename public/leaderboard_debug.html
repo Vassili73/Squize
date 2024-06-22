@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script src="js/utils.js"></script>
+    <script src="js/jquery.min.js"></script>
+
+    <title>Squize - Debug</title>
+  </head>
+
+  <body>
+    <div class="container py-3">
+        <form id="pointsPercentageForm">
+            <label for="points">Points</label>
+            <input type="number" id="points" name="points" required>
+
+            <label for="percentage">Percentage</label>
+            <input type="number" id="percentage" name="percentage" required>
+
+            <button type="btnSubmit">Submit</button>
+        </form>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('#pointsPercentageForm').submit(function(form) {
+            form.preventDefault();
+
+            let points = $('#points').val();
+            let percentage= $('#percentage').val();
+
+            $.ajax({
+              url: '/api/leaderboard/update',
+              method: 'POST',
+              contentType: 'application/json; charset=utf-8',
+              cache: false,
+              dataType: 'json',
+              data: JSON.stringify({ 'points': points, 'percentage': percentage })
+            }).done(function (response) {
+              console.log(response);
+            }).fail(function (jqXHR, statusText, error) {
+              console.log(jqXHR.responseText);
+            });
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -24,4 +24,19 @@ serviceRouter.get('/leaderboard/:country', function(request, response) {
     response.status(200).json(results);
 });
 
+serviceRouter.post('/leaderboard/update', function(request, response) {
+    if (!request.session || !request.session.loggedIn) {
+        response.status(400).json({ message: 'Not logged in' });
+        return;
+    }
+
+    let leaderboardDao = new LeaderboardDao(request.app.locals.dbConnection);
+    if (!leaderboardDao.createOrUpdate(request.session.user.id, request.body.points, request.body.percentage)) {
+        response.status(400).json({ message: 'Failed to update leaderboard' });
+        return;
+    }
+
+    response.status(200);
+});
+
 module.exports = serviceRouter;

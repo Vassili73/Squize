@@ -77,10 +77,10 @@ class LeaderboardDao {
         return results;
     }
 
-    create(user_id, points, percentage) {
-        var sql = 'INSERT INTO Leaderboard (user_id,points,percentage) VALUES (?,?,?)';
+    create(user_id, score, percentage) {
+        var sql = 'INSERT INTO Leaderboard (user_id,score,percentage) VALUES (?,?,?)';
         var statement = this._conn.prepare(sql);
-        var result = statement.run([user_id, points, percentage]);
+        var result = statement.run([user_id, score, percentage]);
         if (result.changes != 1) {
             return undefined;
         }
@@ -88,10 +88,10 @@ class LeaderboardDao {
         return result;
     }
 
-    update(leaderboard_id, user_id, points, percentage) {
-        var sql = 'UPDATE Leaderboard SET user_id=?,points=?,percentage=? WHERE leaderboard_id=?';
+    update(leaderboard_id, user_id, score, percentage) {
+        var sql = 'UPDATE Leaderboard SET user_id=?,score=?,percentage=? WHERE leaderboard_id=?';
         var statement = this._conn.prepare(sql);
-        var result = statement.run([user_id, points, percentage, leaderboard_id]);
+        var result = statement.run([user_id, score, percentage, leaderboard_id]);
         if (result.changes != 1) {
             return undefined;
         }
@@ -99,13 +99,13 @@ class LeaderboardDao {
         return result;
     }
 
-    createOrUpdate(user_id, points, percentage) {
+    createOrUpdate(user_id, score, percentage) {
         let existing = this.loadByUserId(user_id);
         if (existing) {
-            return this.update(existing.leaderboard_id, user_id, points, percentage);
+            return this.update(existing.leaderboard_id, user_id, score, percentage);
         }
 
-        return this.create(user_id, points, percentage);
+        return this.create(user_id, score, percentage);
     }
 }
 
