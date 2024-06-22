@@ -8,6 +8,9 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
 
+    <script src="js/utils.js"></script>
+    <script src="js/jquery.min.js"></script>
+
     <title>Squize - Profile</title>
   </head>
 
@@ -17,14 +20,14 @@
         <div class="d-flex flex-column flex-md-row align-items-center p-3 mb-4 border-bottom">
           <a href="/"><img style="width: 40px;" src="./favicon.ico" alt=""></a>
           <a class="text-decoration-none link-body-emphasis" href="/"><h5 class="my-0 mr-md-auto font-weight-normal">Squize</h5></a>
-          <a class="d-inline-flex mt-2 mt-md-0 ms-md-auto btn btn-outline-danger" href="/">Logout</a>
+          <button id="btnLogout" class="d-inline-flex mt-2 mt-md-0 ms-md-auto btn btn-outline-danger">Logout</button>
         </div>
       </header>
 
       <main class="d-flex flex-nowrap">
         <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark rounded" style="width: 14rem;">
           <a href="/profile" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-            <span class="fs-4">Profile</span>
+            <span class="fs-4" id="titleProfile">Profile</span>
           </a>
           <hr>
           <ul class="nav nav-pills flex-column mb-auto">
@@ -137,5 +140,30 @@
     </div>
 
     <script type="module" src="js/main.js"></script>
+    <script>
+      $(document).ready(function() {
+        checkCurrentUser(function(user) {
+          if (user) {
+            console.log(user);
+            $('#titleProfile').text(user.username + "'s Profile");
+          } else {
+            location.href = 'login';
+          }
+        });
+  
+        $('#btnLogout').click(function() {
+          $.ajax({
+            url: '/api/user/logout',
+            method: 'POST',
+            cache: false,
+          }).done(function (response) {
+            console.log(response);
+            location.href = 'login';
+          }).fail(function (jqXHR, statusText, error) {
+            console.log(jqXHR.responseText);
+          });
+        });
+      });
+      </script>
   </body>
 </html>
