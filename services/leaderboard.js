@@ -31,7 +31,7 @@ serviceRouter.post('/leaderboard/update', function(request, response) {
     }
 
     let leaderboardDao = new LeaderboardDao(request.app.locals.dbConnection);
-    if (!leaderboardDao.createOrUpdate(request.session.user.id, request.body.points, request.body.percentage)) {
+    if (!leaderboardDao.createOrUpdate(request.session.user.user_id, request.body.points, request.body.percentage)) {
         response.status(400).json({ message: 'Failed to update leaderboard' });
         return;
     }

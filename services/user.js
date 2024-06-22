@@ -25,7 +25,7 @@ serviceRouter.post('/user/login', function(request, response) {
 
     request.session.loggedIn = true;
     request.session.user = {
-        id: user.user_id,
+        user_id: user.user_id,
         username: user.username,
         email: user.email
     };
