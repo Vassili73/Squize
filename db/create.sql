@@ -21,7 +21,7 @@ CREATE TABLE Quizze (
 	beschreibung TEXT NOT NULL,
 	is_public BOOLEAN,
 	aufrufe INTEGER,
-	FOREIGN KEY user_id REFERENCES User(user_id)
+	FOREIGN KEY (user_id) REFERENCES User(user_id)
 
 );
 
@@ -32,7 +32,7 @@ CREATE TABLE Questions (
 	position INTEGER NOT NULL,
 	question TEXT NOT NULL,
 	question_type TEXT NOT NULL,
-	FOREIGN KEY quiz_id REFERENCES Quizze(quiz_id)
+	FOREIGN KEY (quiz_id) REFERENCES Quizze(quiz_id)
 );
 
 -- alle Antworten

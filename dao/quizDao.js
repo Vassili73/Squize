@@ -37,6 +37,14 @@ class QuizDao {
         return result;
     }
 
+    getPopularQuizzes(amount) {
+        var sql = 'SELECT * FROM Quizze ORDER BY aufrufe DESC LIMIT ?';
+        var statement = this._conn.prepare(sql);
+        var results = statement.all(amount);
+        
+        return results;
+    }
+
     createQuiz(quizobject) {
         var maxql = 'SELECT MAX(quiz_id) FROM Quizze';
         var stmt = this._conn.prepare(maxql);
