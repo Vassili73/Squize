@@ -50,3 +50,12 @@ CREATE TABLE Leaderboard (
 	percentage INTEGER,
 	FOREIGN KEY (user_id) REFERENCES User(user_id)
 );
+/*
+CREATE TABLE User_Quizze (
+	user_quiz_id INTEGER PRIMARY KEY AUTOINCREMENT
+	user_id INTEGER NOT NULL
+	quiz_id INTEGER NOT NULL
+	FOREIGN KEY (user_id) REFERENCES User(user_id),
+    FOREIGN KEY (quiz_id) REFERENCES Quiz(quiz_id)
+);
+*/
