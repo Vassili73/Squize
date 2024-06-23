@@ -19,28 +19,29 @@ CREATE TABLE Quizze (
 	quizname TEXT NOT NULL,
 	last_edited DATE NOT NULL,
 	beschreibung TEXT NOT NULL,
-	is_public BOOLEAN
+	is_public BOOLEAN,
+	aufrufe INTEGER,
+	FOREIGN KEY (user_id) REFERENCES User(user_id)
+
 );
 
--- Quizfragen mit auswahlmöglichkeiten
-CREATE TABLE Questions_choice (
-	questions_choice_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+-- alle Quizfragen
+CREATE TABLE Questions (
+	question_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	quiz_id INTEGER NOT NULL,
-	prev_id INTEGER KEY,
+	position INTEGER NOT NULL,
 	question TEXT NOT NULL,
-	answer_correct TEXT NOT NULL, --position der Antworten zufällig verteilen
-	answer_false_1 TEXT NOT NULL,
-	answer_false_2 TEXT NOT NULL,
-	answer_false_3 TEXT NOT NULL
+	question_type TEXT NOT NULL,
+	FOREIGN KEY (quiz_id) REFERENCES Quizze(quiz_id)
 );
 
--- Quizfragen mit Texteingabe
-CREATE TABLE Questions_text (
-	questions_textid INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	quiz_id INTEGER NOT NULL,
-	prev_id INTEGER KEY,
-	question TEXT NOT NULL,
-	answer1 TEXT NOT NULL
+-- alle Antworten
+CREATE TABLE Answers (
+	answer_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	question_id INTEGER NOT NULL,
+	answer_text TEXT NOT NULL,
+	is_correct BOOLEAN,
+	FOREIGN KEY (question_id) REFERENCES Questions(question_id)
 );
 
 CREATE TABLE Leaderboard (
