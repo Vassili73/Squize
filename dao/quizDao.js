@@ -4,7 +4,7 @@ class QuizDao {
     constructor(dbConnection) {
         this._conn = dbConnection;
     }    
-    
+
     getConnection() {
         return this._conn;
     }
@@ -35,14 +35,6 @@ class QuizDao {
         var result = statement.get(quizname);
         
         return result;
-    }
-
-    getPopularQuizzes(amount) {
-        var sql = 'SELECT * FROM Quizze ORDER BY aufrufe DESC LIMIT ?';
-        var statement = this._conn.prepare(sql);
-        var results = statement.all(amount);
-        
-        return results;
     }
 
     createQuiz(quizobject) {
