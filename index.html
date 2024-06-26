@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <title>Squize</title>
+  </head>
+
+  <body>
+    <div class="container py-3">
+      <header>
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 mb-4 border-bottom">
+          <a href="/"><img style="width: 40px;" src="./favicon.ico" alt=""></a>
+          <a class="text-decoration-none link-body-emphasis" href="/"><h5 class="my-0 mr-md-auto font-weight-normal">Squize</h5></a>
+          <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+            <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/login">Login</a>
+          </nav>
+          <a class="btn btn-outline-primary" href="/register">Register</a>
+        </div>
+      </header>
+
+      <main>
+        <div class="p-3 pb-md-4 mx-auto text-center">
+          <h1 class="display-4 fw-normal text-body-emphasis">Squize</h1>
+          <p class="fs-5 text-body-secondary">Die FOSS Quiz Plattform.</p>
+        </div>
+
+        <div class="d-flex justify-content-center">
+          <a class="btn btn-outline-primary" href="/leaderboard">
+            <i>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M353.8 54.1L330.2 6.3c-3.9-8.3-16.1-8.6-20.4 0L286.2 54.1l-52.3 7.5c-9.3 1.4-13.3 12.9-6.4 19.8l38 37-9 52.1c-1.4 9.3 8.2 16.5 16.8 12.2l46.9-24.8 46.6 24.4c8.6 4.3 18.3-2.9 16.8-12.2l-9-52.1 38-36.6c6.8-6.8 2.9-18.3-6.4-19.8l-52.3-7.5zM256 256c-17.7 0-32 14.3-32 32V480c0 17.7 14.3 32 32 32H384c17.7 0 32-14.3 32-32V288c0-17.7-14.3-32-32-32H256zM32 320c-17.7 0-32 14.3-32 32V480c0 17.7 14.3 32 32 32H160c17.7 0 32-14.3 32-32V352c0-17.7-14.3-32-32-32H32zm416 96v64c0 17.7 14.3 32 32 32H608c17.7 0 32-14.3 32-32V416c0-17.7-14.3-32-32-32H480c-17.7 0-32 14.3-32 32z"/></svg>
+            </i>
+            &nbsp; Leaderboard
+          </a>
+        </div>
+
+        <form class="d-flex py-5 justify-content-center">
+          <input class="form-control me-2 w-50" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">
+            <i>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+              </svg>
+            </i>
+            &nbsp; Search
+          </button>
+        </form>
+
+        <p class="display-6">Popular</h2>
+        <div class="album py-5 bg-body-secondary rounded">
+          <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+              <div class="col">
+                <div class="card shadow-sm h-100">
+                  <img width="100%" height="225" src="assets/quiz_placeholder.png" background="#55595c" color="#eceeef" class="card-img-top" text="Thumbnail"/>
+                  <div class="card-body d-flex flex-column">
+                    <h4 class="display-8">Wissenstest 1</h4>
+                    <p class="card-text">Teste dein Wissen in verschiedenen Arten bla bla bla</p>
+                    <div class="d-flex mt-auto justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-success" onclick="location.href='/quiz_play1';">Start</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#viewModal">View</button>
+                      </div>
+                      <small class="text-body-secondary">Matetrinker123</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card shadow-sm h-100">
+                  <img width="100%" height="225" src="assets/quiz_placeholder.png" background="#55595c" color="#eceeef" class="card-img-top" text="Thumbnail"/>
+                  <div class="card-body d-flex flex-column">
+                    <h4 class="display-8">Wissenstest 2</h4>
+                    <p class="card-text">Teste dein Wissen in verschiedenen Arten bla bla bla</p>
+                    <div class="d-flex mt-auto justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-success" onclick="location.href='/quiz_play1';">Start</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#viewModal">View</button>
+                      </div>
+                      <small class="text-body-secondary">Matetrinker123</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card shadow-sm h-100">
+                  <img width="100%" height="225" src="assets/quiz_placeholder.png" background="#55595c" color="#eceeef" class="card-img-top" text="Thumbnail"/>
+                  <div class="card-body d-flex flex-column">
+                    <h4 class="display-8">Wissenstest 3</h4>
+                    <p class="card-text">Teste dein Wissen in verschiedenen Arten bla bla bla und so weiter........</p>
+                    <div class="d-flex mt-auto justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-success" onclick="location.href='/quiz_play1';">Start</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#viewModal">View</button>
+                      </div>
+                      <small class="text-body-secondary">Matetrinker123</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- View Modal -->
+        <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Wissenstest</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <img width="100%" height="225" src="assets/quiz_placeholder.png" background="#55595c" color="#eceeef" class="card-img-top" text="Thumbnail"/>
+                <p>Teste dein Wissen in verschiedenen Arten bla bla bla und so weiter........</p>
+                <p class="fw-lighter">
+                  Created by: Matetrinker123<br>
+                  Last updated: 2024-01-01
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary" onclick="location.href='/multiplayer';">Play together</button>
+                <button type="button" class="btn btn-success" onclick="location.href='/quiz_play1';">Start</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2024 Squize Team</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="/impressum">Impressum</a></li>
+          <li class="list-inline-item"><a target="_blank" href="https://github.com/DerEchteJoghurt/Squize">GitHub</a></li>
+        </ul>
+      </footer>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

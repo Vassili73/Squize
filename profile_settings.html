@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <title>Squize - Profile</title>
+  </head>
+
+  <body>
+    <div class="container py-3">
+      <header>
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 mb-4 border-bottom">
+          <a href="/"><img style="width: 40px;" src="./favicon.ico" alt=""></a>
+          <a class="text-decoration-none link-body-emphasis" href="/"><h5 class="my-0 mr-md-auto font-weight-normal">Squize</h5></a>
+          <a class="d-inline-flex mt-2 mt-md-0 ms-md-auto btn btn-outline-danger" href="/">Logout</a>
+        </div>
+      </header>
+
+      <main class="d-flex flex-nowrap">
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark rounded" style="width: 14rem;">
+          <a href="/profile" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <span class="fs-4">Profile</span>
+          </a>
+          <hr>
+          <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+              <a href="/profile" class="nav-link text-white" aria-current="page">
+                My Quizzes
+              </a>
+            </li>
+            <li>
+              <a href="/profile_saved" class="nav-link text-white">
+                Saved Quizzes
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link active">
+                Settings
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="form-signin w-100 m-4">
+          <div class="row">
+            <div class="col mb-3">
+              <h2>Change Username</h2>
+              <form id="usernameForm">
+                <div class="form-floating">
+                  <input type="text" class="form-control" id="floatingUsername" placeholder="Username">
+                  <label for="floatingUsername">New Username</label>
+                </div>
+                <br>
+                <button class="btn btn-primary w-100 py-2" type="submit">Save Changes</button>
+              </form>
+            </div>
+        
+            <div class="col mb-3">
+              <h2>Change Password</h2>
+              <form>          
+                <div class="form-floating">
+                  <input type="password" class="form-control" id="floatingInput" placeholder="Password">
+                  <label for="floatingInput">Old Password</label>
+                </div>
+                <div class="form-floating">
+                  <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                  <label for="floatingPassword">New Password</label>
+                </div>
+                <div class="form-floating">
+                  <input type="password" class="form-control" id="floatingPassword2" placeholder="Password">
+                  <label for="floatingPassword2">Repeat New Password</label>
+                </div>
+                <br>
+                <button class="btn btn-primary w-100 py-2" type="submit">Save Changes</button>
+              </form>
+            </div>
+            <div class="col mb-3">
+              <h2>Change Email</h2>
+              <form id="emailForm">
+                <div class="form-floating">
+                  <input type="email" class="form-control" id="floatingPassword2" placeholder="Password">
+                  <label for="floatingPassword2">New Email</label>
+                </div>
+                <br>
+                <button class="btn btn-primary w-100 py-2" type="submit">Save Changes</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2024 Squize Team</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="/impressum">Impressum</a></li>
+          <li class="list-inline-item"><a target="_blank" href="https://github.com/DerEchteJoghurt/Squize">GitHub</a></li>
+        </ul>
+      </footer>
+    </div>
+  </body>
+</html>

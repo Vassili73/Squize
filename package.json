@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "build": "npm run css-compile",
+    "css-compile": "sass --style compressed --source-map --embed-sources --no-error-css --load-path=node_modules scss/:css/",
+    "server": "sirv --dev --no-clear --port 3000"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3"
+  },
+  "devDependencies": {
+    "sass": "^1.75.0",
+    "sirv-cli": "^2.0.2"
+  }
+}

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/quiz_play.css">
+
+    <title>Squize - Play</title>
+  </head>
+
+  <body>
+    <div class="container py-3">
+      <header>
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 mb-4 border-bottom">
+          <a href="/"><img style="width: 40px;" src="./favicon.ico" alt=""></a>
+          <a class="text-decoration-none link-body-emphasis" href="/"><h5 class="my-0 mr-md-auto font-weight-normal">Squize</h5></a>
+          <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+            <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/login">Login</a>
+          </nav>
+          <a class="btn btn-outline-primary" href="/register">Register</a>
+        </div>
+      </header>
+
+      <main>
+        <div class="container py-5">
+            <div class="h-100 d-flex align-items-center justify-content-center">
+                <div>
+                    <div class="bg-body-secondary rounded">
+                        <h3 class="fw-lighter fs-5 text-center pt-2">Frage 1 / 2</h3>
+                        <h2 class="p-5 text-center">Was ist die Hauptstadt von Deutschland?</h2>
+                        <div class="row row-cols-2 p-5">
+                            <div class="col py-2">
+                              <input type="radio" class="btn-check" name="options-outlined" id="option1-outlined" autocomplete="off">
+                              <label class="btn btn-danger quiz_button p-5" for="option1-outlined">Tübingen</label>
+                            </div>
+                            <div class="col py-2">
+                              <input type="radio" class="btn-check" name="options-outlined" id="option2-outlined" autocomplete="off" checked>
+                              <label class="btn btn-success quiz_button p-5" for="option2-outlined">Berlin</label>
+                            </div>
+                            <div class="col py-2">
+                              <input type="radio" class="btn-check" name="options-outlined" id="option3-outlined" autocomplete="off">
+                              <label class="btn btn-danger quiz_button p-5" for="option3-outlined">Albstadt</label>
+                            </div>
+                            <div class="col py-2">
+                              <input type="radio" class="btn-check" name="options-outlined" id="option4-outlined" autocomplete="off">
+                              <label class="btn btn-danger quiz_button p-5" for="option4-outlined">6394</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h-100 d-flex align-items-center justify-content-center py-2">
+                        <a class="btn btn-primary" href="/quiz_play2">Next</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </main>
+
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2024 Squize Team</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="/impressum">Impressum</a></li>
+          <li class="list-inline-item"><a target="_blank" href="https://github.com/DerEchteJoghurt/Squize">GitHub</a></li>
+        </ul>
+      </footer>
+    </div>
+  </body>
+</html>
